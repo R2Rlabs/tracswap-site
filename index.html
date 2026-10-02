@@ -112,8 +112,12 @@ footer{color:var(--dim);font-size:13px;padding:30px 0 50px;border-top:1px solid 
 <footer>TracSwap is independent software built on Trac Network and Solana, and is not affiliated with Trac Systems. Trading crypto carries risk. Nothing here is financial advice.</footer>
 </div>
 <script>
-// Paste the form service endpoint here (e.g. https://formspree.io/f/xxxxxx). Leave empty to keep the form in preview mode.
-const FORM_ENDPOINT = '';
+// Google Form wiring. action = the form's .../formResponse URL; fields map our names to the form's entry ids.
+// Leave action empty to keep the form in preview mode.
+const GOOGLE_FORM = {
+  action: '',
+  fields: { email: '', side: '', size: '', region: '', stable: '', maker_size: '', handle: '' },
+};
 const form = document.getElementById('waitlist'), msg = document.getElementById('msg');
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -121,10 +125,12 @@ form.addEventListener('submit', async (e) => {
   if (!form.checkValidity()) { msg.className = 'msg err'; msg.textContent = 'Please fill in email, what you want to do, trade size and region.'; return; }
   const body = Object.fromEntries(new FormData(form));
   if (body._gotcha) return;
-  if (!FORM_ENDPOINT) { msg.className = 'msg ok'; msg.textContent = 'Preview mode: the form isn\'t connected yet.'; return; }
+  if (!GOOGLE_FORM.action) { msg.className = 'msg ok'; msg.textContent = 'Preview mode: the form isn\'t connected yet.'; return; }
+  const params = new URLSearchParams();
+  for (const [name, entry] of Object.entries(GOOGLE_FORM.fields)) if (entry && body[name]) params.append(entry, body[name]);
   try {
-    const r = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) });
-    if (!r.ok) throw new Error(r.status);
+    // Google Forms doesn't send CORS headers, so the response is opaque; a network failure still throws.
+    await fetch(GOOGLE_FORM.action, { method: 'POST', mode: 'no-cors', body: params });
     form.reset(); msg.className = 'msg ok'; msg.textContent = "You're on the list. We'll be in touch before launch.";
   } catch { msg.className = 'msg err'; msg.textContent = 'Something went wrong. Please try again in a minute.'; }
 });
