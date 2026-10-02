@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TracSwap · Trade TNK from your own wallet</title>
+<meta name="description" content="Swap TNK for USDC or USDT directly between wallets. No account, no custody. Join the early-access list.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0e14;--panel:#121722;--panel2:#171d2a;--line:#232b3b;--line2:#2d374b;--text:#e6eaf2;--muted:#8c96a8;--dim:#5d677a;--accent:#7c5cff;--accent2:#a48bff;--green:#22c38e;--red:#f0506e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font:16px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent2)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
+.logo i{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#3dd6c6)}
+.btn{display:inline-block;border:0;border-radius:12px;padding:13px 20px;font:600 15px Inter;color:#fff;background:var(--accent);text-decoration:none;cursor:pointer}
+.btn.ghost{background:transparent;border:1px solid var(--line2);color:var(--text)}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:40px 0 60px}
+h1{font-size:50px;line-height:1.08;letter-spacing:-1.2px}
+h1 span{background:linear-gradient(90deg,var(--accent2),#3dd6c6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);font-size:18px;margin:18px 0 26px;max-width:520px}
+.pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.pill{font-size:13px;color:#c9d1e0;border:1px solid var(--line2);border-radius:999px;padding:6px 12px;background:var(--panel)}
+.hero img{width:100%;border-radius:18px;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.45)}
+section{padding:56px 0;border-top:1px solid var(--line)}
+h2{font-size:30px;letter-spacing:-.5px;margin-bottom:10px}
+.sub{color:var(--muted);max-width:640px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}
+.card h3{font-size:17px;margin:10px 0 6px}
+.card p{color:var(--muted);font-size:15px}
+.num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(124,92,255,.15);color:var(--accent2);font-weight:700;font-size:14px}
+.pair{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:24px;font:600 18px 'JetBrains Mono'}
+.tok{display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 14px 8px 8px}
+.tok b{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#fff;font:700 11px Inter}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+.form label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--muted)}
+.form .full{grid-column:1/-1}
+input,select{font:15px Inter;color:var(--text);background:var(--panel2);border:1px solid var(--line2);border-radius:10px;padding:12px}
+input:focus,select:focus{outline:2px solid var(--accent);border-color:transparent}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips label{flex-direction:row;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--line2);border-radius:10px;padding:10px 12px;color:var(--text);cursor:pointer}
+.msg{margin-top:14px;font-size:15px}
+.ok{color:var(--green)} .err{color:var(--red)}
+.faq details{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:10px}
+.faq summary{cursor:pointer;font-weight:600}
+.faq p{color:var(--muted);margin-top:8px;font-size:15px}
+footer{color:var(--dim);font-size:13px;padding:30px 0 50px;border-top:1px solid var(--line)}
+@media (max-width:860px){.hero{grid-template-columns:1fr}h1{font-size:38px}.grid3{grid-template-columns:1fr}.form{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="logo"><i></i>TracSwap</div><a class="btn ghost" href="#join">Get early access</a></header>
+
+<div class="hero">
+  <div>
+    <h1>Trade <span>TNK</span> straight from your own wallet.</h1>
+    <p class="lead">Swap TNK for USDC or USDT directly with another trader. No exchange account. Your funds never sit with us. Every swap either completes for both sides or refunds both.</p>
+    <a class="btn" href="#join">Join the early-access list</a>
+    <div class="pills"><span class="pill">No account</span><span class="pill">No custody</span><span class="pill">~20-second swaps</span><span class="pill">Open source</span></div>
+  </div>
+  <img src="swap.png" alt="TracSwap swap screen: pay 500 USDT, receive TNK">
+</div>
+
+<section>
+  <h2>What you can trade</h2>
+  <p class="sub">One market at launch: TNK, the native coin of Trac Network, against US dollar stablecoins on Solana.</p>
+  <div class="pair"><span class="tok"><b style="background:linear-gradient(135deg,#7c5cff,#3dd6c6)">T</b>TNK</span> ⇄ <span class="tok"><b style="background:#2775ca">$</b>USDC</span><span class="tok"><b style="background:#26a17b">₮</b>USDT</span></div>
+  <p class="sub" style="margin-top:16px">You'll need a Trac wallet (for TNK) and a Solana wallet such as Phantom (for USDC/USDT).</p>
+</section>
+
+<section>
+  <h2>How a swap works</h2>
+  <div class="grid3">
+    <div class="card"><span class="num">1</span><h3>Get a quote</h3><p>Makers answer your request in milliseconds, priced close to the main exchanges.</p></div>
+    <div class="card"><span class="num">2</span><h3>Both sides lock</h3><p>Your dollars go into a Solana escrow that only code controls. The maker's TNK goes to an address neither of you can move alone.</p></div>
+    <div class="card"><span class="num">3</span><h3>Both sides collect</h3><p>The step that pays the maker unlocks your TNK. If anything stalls, you get your funds back.</p></div>
+  </div>
+</section>
+
+<section id="join">
+  <h2>Get early access</h2>
+  <p class="sub">Tell us what you'd trade. It helps us line up enough liquidity for launch. We'll only email you about TracSwap.</p>
+  <form class="form" id="waitlist" novalidate>
+    <label class="full">Email<input type="email" name="email" required placeholder="you@example.com"></label>
+    <label>I want to
+      <select name="side" required><option value="">Choose…</option><option>Buy TNK</option><option>Sell TNK</option><option>Both</option><option>Provide liquidity (maker)</option></select></label>
+    <label>Typical trade size
+      <select name="size" required><option value="">Choose…</option><option>Under $100</option><option>$100 – $1,000</option><option>$1,000 – $10,000</option><option>$10,000+</option></select></label>
+    <label>Country / region<input name="region" required placeholder="e.g. United States"></label>
+    <label>Stablecoin you'd use
+      <select name="stable"><option>USDC</option><option>USDT</option><option>Either</option></select></label>
+    <label class="full">If you'd provide liquidity: roughly how much? (optional)<input name="maker_size" placeholder="e.g. 20,000 TNK or $2,000 USDC"></label>
+    <label class="full">Telegram or X handle (optional)<input name="handle" placeholder="@handle"></label>
+    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+    <div class="full"><button class="btn" type="submit">Join the list</button><div class="msg" id="msg" role="status"></div></div>
+  </form>
+</section>
+
+<section class="faq">
+  <h2>Questions</h2>
+  <details><summary>Does TracSwap ever hold my funds?</summary><p>No. Dollars are held by a public Solana program that pays out only by its rules, and TNK sits at an address that needs keys from both traders. Nobody at TracSwap can move either.</p></details>
+  <details><summary>What if the other side disappears mid-swap?</summary><p>Every swap has a deadline. If it doesn't complete, you reclaim your funds yourself, and the other side gets theirs back too.</p></details>
+  <details><summary>Where is TracSwap available?</summary><p>It's software you use from your own wallets. Access is blocked only from sanctioned regions. Check the rules where you live.</p></details>
+  <details><summary>When does it launch?</summary><p>After testing on Solana devnet and a small-limit mainnet trial. People on this list hear first.</p></details>
+</section>
+
+<footer>TracSwap is independent software built on Trac Network and Solana, and is not affiliated with Trac Systems. Trading crypto carries risk. Nothing here is financial advice.</footer>
+</div>
+<script>
+// Paste the form service endpoint here (e.g. https://formspree.io/f/xxxxxx). Leave empty to keep the form in preview mode.
+const FORM_ENDPOINT = '';
+const form = document.getElementById('waitlist'), msg = document.getElementById('msg');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  msg.className = 'msg'; msg.textContent = '';
+  if (!form.checkValidity()) { msg.className = 'msg err'; msg.textContent = 'Please fill in email, what you want to do, trade size and region.'; return; }
+  const body = Object.fromEntries(new FormData(form));
+  if (body._gotcha) return;
+  if (!FORM_ENDPOINT) { msg.className = 'msg ok'; msg.textContent = 'Preview mode: the form isn\'t connected yet.'; return; }
+  try {
+    const r = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) });
+    if (!r.ok) throw new Error(r.status);
+    form.reset(); msg.className = 'msg ok'; msg.textContent = "You're on the list. We'll be in touch before launch.";
+  } catch { msg.className = 'msg err'; msg.textContent = 'Something went wrong. Please try again in a minute.'; }
+});
+</script>
+</body>
+</html>
